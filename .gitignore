@@ -11,6 +11,10 @@
 # production
 /build
 
+# ui files
+*.xd
+
+
 # misc
 .DS_Store
 .env.local
