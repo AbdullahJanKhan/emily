@@ -22,6 +22,9 @@ import { Grid, Typography } from '@material-ui/core';
 const drawerWidth = 220;
 
 const useStyles = makeStyles((theme) => ({
+    '@font-face': {
+        fontFamily: 'Montserrat, sans-serif'
+    },
     root: {
         display: "flex",
     },
@@ -47,15 +50,12 @@ const useStyles = makeStyles((theme) => ({
         display: "none",
     },
     drawer: {
-        width: theme.spacing(8) + 1,
-        [theme.breakpoints.up("sm")]: {
-            width: theme.spacing(12) + 1,
-        },
         flexShrink: 0,
         whiteSpace: "nowrap",
+        dropShadow: "6px 6px 10px rgba(0, 0, 0, 0.16)"
     },
     drawerClose: {
-        background: "#1061b0",
+        background: "linear-gradient(#1061b0 0%, #003c72 100%)",
         color: "#fff",
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerOpen: {
         width: drawerWidth,
-        backgroundColor: "#1061b0",
+        background: "linear-gradient(#1061b0 0%, #003c72 100%)",
         color: "#fff",
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
@@ -162,7 +162,7 @@ export default function MainDrawer() {
                             [classes.drawerOpen]: open,
                             [classes.drawerClose]: !open,
                         }),
-                    }}                    >
+                    }}>
                     <Grid
                         item
                         className={classes.toolbar}
@@ -181,7 +181,7 @@ export default function MainDrawer() {
                         />
                     </Grid>
                     <Divider />
-                    <Grid container xs={12}>
+                    <Grid container>
                         <List>
                             <ListItem key={1} className={classes.logoListItem}>
                                 <img src={logo}
@@ -197,7 +197,7 @@ export default function MainDrawer() {
                                     <img src={dashboard} alt='User Dashboard' className={classes.imageIcon} />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={<Typography variant="p"
+                                    primary={<Typography variant="body1"
                                         className={clsx(classes.listItemTextStyle, {
                                             [classes.hide]: !open,
                                         })}
@@ -208,7 +208,7 @@ export default function MainDrawer() {
                                     <img src={report} alt='Reports' className={classes.imageIcon} />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={<Typography variant="p"
+                                    primary={<Typography variant="body1"
                                         className={clsx(classes.listItemTextStyle, {
                                             [classes.hide]: !open,
                                         })}
@@ -220,7 +220,7 @@ export default function MainDrawer() {
                                     <img src={setting} alt='Settings' className={classes.imageIcon} />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={<Typography variant="p"
+                                    primary={<Typography variant="body1"
                                         className={clsx(classes.listItemTextStyle, {
                                             [classes.hide]: !open,
                                         })}
@@ -232,11 +232,11 @@ export default function MainDrawer() {
                                     <img src={user} alt='User' className={classes.imageIcon} />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={<Typography variant="p"
+                                    primary={<Typography variant="body1"
                                         className={clsx(classes.listItemTextStyle, {
                                             [classes.hide]: !open,
                                         })}
-                                    >ABDUL HADI<br /><Typography variant="subtitle2">PID: 12345678</Typography></Typography>} />
+                                    >ABDUL HADI<br /><Typography variant="caption">PID: 12345678</Typography></Typography>} />
                             </ListItem>
                             <Divider className={classes.dividerStyle} />
                             <ListItem button key={6} className={classes.listItemSpacing}>
@@ -244,7 +244,7 @@ export default function MainDrawer() {
                                     <img src={logout} alt='Logout' className={classes.imageIcon} />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={<Typography variant="p"
+                                    primary={<Typography variant="body1"
                                         className={clsx(classes.listItemTextStyle, {
                                             [classes.hide]: !open,
                                         })}
