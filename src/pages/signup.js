@@ -15,20 +15,22 @@ import logo from '../emily/logo.svg';
 import tick from '../emily/tick.svg';
 
 import Step1 from '../components/signup_step1';
+import Step2 from '../components/signup_step2';
+import Step3 from '../components/signup_step3';
 
 function getSteps() {
     return ['SIGN UP', 'VERIFY CODE', 'USER PROFILE'];
 }
 
-function getStepContent(stepIndex) {
+function getStepContent(stepIndex, setActiveStep) {
     // ADD FUNCTION HERE
     switch (stepIndex) {
         case 0:
-            return <Step1 />;
+            return <Step1 setActiveStep={setActiveStep} />;
         case 1:
-            return 'VERIFICATION';
+            return <Step2 setActiveStep={setActiveStep} />;
         case 2:
-            return 'USER PROFILE';
+            return <Step3 setActiveStep={setActiveStep} />;
         default:
             return 'Unknown stepIndex';
     }
@@ -96,6 +98,10 @@ const useStyles = makeStyles({
         alignItems: "center",
         textAling: "center",
         margin: "auto",
+    },
+    stepper: {
+        padding: 5,
+        margin: 0,
     }
 })
 
@@ -220,6 +226,7 @@ export default function Signup() {
                                     activeStep={activeStep}
                                     alternativeLabel
                                     connector={<ColorlibConnector />}
+                                    className={classes.stepper}
                                 >
                                     {steps.map((label) => (
                                         <Step key={label}>
@@ -231,7 +238,7 @@ export default function Signup() {
                             <Grid container>
                                 <Grid item sm={1}></Grid>
                                 <Grid item xs={12} sm={10}>
-                                    {getStepContent(activeStep)}
+                                    {getStepContent(activeStep, setActiveStep)}
                                 </Grid>
                             </Grid>
                         </Card>

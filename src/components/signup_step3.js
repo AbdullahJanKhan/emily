@@ -5,11 +5,14 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import InputAdornment from "@material-ui/core/InputAdornment";
+
+import calender from "../emily/calender.svg";
 
 const useStyles = makeStyles({
     inputProps: {
         color: "#7ea2c4",
-        fontWeight: "600",
+        fontWeight: "bold",
         fontSize: 12,
         marginTop: 5,
     },
@@ -19,8 +22,8 @@ const useStyles = makeStyles({
         boxShadow: "3px 3px 6px rgba(0, 0, 0, 0.16)",
         fontWeight: 'bold',
         color: "#fff",
-        marginTop: 10,
-        marginBottom: 5,
+        marginTop: 15,
+        marginBottom: 15,
     },
     BtnContained: {
         "&:hover": {
@@ -36,26 +39,31 @@ const useStyles = makeStyles({
         fontWeight: 700,
         textAlign: "center",
     },
+    typographyTextSub: {
+        fontWeight: 600,
+        textAlign: "center",
+    },
     btmText: {
         textAlign: "center",
-        padding: 5,
     },
-    inputField: {
-        fontSize: 12,
-        marginTop: 5,
+    inputBtm: {
+        width: "45%",
     },
+    startIcon: {
+        width: 25,
+        height: 25,
+    }
 })
 
-export default function Step1({ setActiveStep }) {
+export default function Step3({ setActiveStep }) {
     const classes = useStyles();
     return (
         <Grid>
-            <Typography variant="h5" className={classes.typographyText}>SIGNUP</Typography>
+            <Typography variant="h5" className={classes.typographyText}>USER PROFILE</Typography>
             <TextField
                 fullWidth
-                label="USERNAME"
+                label="FULL NAME"
                 type="text"
-                className={classes.inputField}
                 InputLabelProps={{
                     className: classes.inputProps
                 }}
@@ -65,21 +73,8 @@ export default function Step1({ setActiveStep }) {
             />
             <TextField
                 fullWidth
-                label="EMAIL"
-                type="email"
-                className={classes.inputField}
-                InputLabelProps={{
-                    className: classes.inputProps
-                }}
-                inputProps={{
-                    className: classes.inputProps,
-                }}
-            />
-            <TextField
-                fullWidth
-                label="CONTACT NUMBER"
+                label="COUNTRY"
                 type="text"
-                className={classes.inputField}
                 InputLabelProps={{
                     className: classes.inputProps
                 }}
@@ -89,9 +84,8 @@ export default function Step1({ setActiveStep }) {
             />
             <TextField
                 fullWidth
-                label="PASSWORD"
-                type="password"
-                className={classes.inputField}
+                label="OCCUPATION"
+                type="text"
                 InputLabelProps={{
                     className: classes.inputProps
                 }}
@@ -99,18 +93,42 @@ export default function Step1({ setActiveStep }) {
                     className: classes.inputProps,
                 }}
             />
-            <TextField
-                fullWidth
-                label="CONFIRM PASSWORD"
-                type="password"
-                className={classes.inputField}
-                InputLabelProps={{
-                    className: classes.inputProps
-                }}
-                inputProps={{
-                    className: classes.inputProps,
-                }}
-            />
+            <Grid container>
+                <Grid item xs={12} sm={5}>
+                    <TextField
+                        fullWidth
+                        label="GENDER"
+                        type="text"
+                        InputLabelProps={{
+                            className: classes.inputProps
+                        }}
+                        inputProps={{
+                            className: classes.inputProps,
+                        }}
+                    />
+                </Grid>
+                <Grid sm={2} />
+                <Grid item xs={12} sm={5}>
+                    <TextField
+                        fullWidth
+                        label="DATE OF BIRTH"
+                        type="text"
+                        InputLabelProps={{
+                            className: classes.inputProps
+                        }}
+                        inputProps={{
+                            className: classes.inputProps,
+                        }}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment>
+                                    <img src={calender} alt="Calender icon" className={classes.startIcon} />
+                                </InputAdornment>
+                            )
+                        }}
+                    />
+                </Grid>
+            </Grid>
             <Button fullWidth
                 variant="contained"
                 className={classes.Btn}
@@ -118,17 +136,10 @@ export default function Step1({ setActiveStep }) {
                     contained: classes.Contained,
                     label: classes.BtnText,
                 }}
-                onClick={() => setActiveStep(1)}
+                onClick={() => setActiveStep(3)}
             >
-
-                CONTINUE
+                SIGNUP
             </Button>
-            <Grid className={classes.btmText}>
-                <Typography variant="body2" display="inline">
-                    HAVE AN ACCOUNT?
-                </Typography>
-                <Typography variant="body2" className={classes.typographyText} display="inline">SIGNIN</Typography>
-            </Grid>
         </Grid>
     )
 }
