@@ -1,7 +1,11 @@
 import React from 'react';
 
 import { Button, Grid, makeStyles, Typography, Card, TextField } from '@material-ui/core';
+
 import logo from '../emily/logo.svg';
+import google from "../emily/google.svg";
+import facebook from "../emily/facebook.svg";
+
 
 const useStyles = makeStyles({
     root: {
@@ -35,24 +39,71 @@ const useStyles = makeStyles({
         alignItems: "center",
         alignContent: 'center'
     },
+    loginText: {
+        fontWeight: 700,
+        textAlign: "center",
+    },
     loginCard: {
         justifyContent: "center",
         textAling: "center",
         marginTop: 100,
         color: '#1061b0',
-        padding: 50,
+        padding: 30,
     },
     inputProps: {
-        color: "#1061b0",
+        color: "#7ea2c4",
         fontWeight: "bold",
     },
     inputField: {
-        borderBottomColor: "#1061b0",
+        marginBottom: 15,
     },
     contained: {
         "&:hover": {
-            background: "rgba(53,133,218,0.2)"
+            background: "rgba(53,133,218,0.8)"
         }
+    },
+    forgotPassword: {
+        fontWeight: 600,
+        textDecoration: 'underline',
+        color: "#7ea2c4",
+        marginBottom: 30,
+    },
+    loginBtn: {
+        borderRadius: 15,
+        background: "#3585da",
+        boxShadow: "3px 3px 6px rgba(0, 0, 0, 0.16)",
+        fontWeight: 'bold',
+        color: "#fff",
+    },
+    loginContained: {
+        "&:hover": {
+            background: "rgba(53,133,218,0.8)",
+        }
+    },
+    loginGContained: {
+        "&:hover": {
+            background: "rgba(220,78,65,0.8)",
+        }
+    },
+    loginBtnText: {
+        fontWeight: 'bold',
+        color: "#fff",
+    },
+    googleBtn: {
+        backgroundColor: "#dc4e41",
+        fontWeight: 600,
+        boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+        margin: 5,
+    },
+    facebookBtn: {
+        backgroundColor: "#1976d2",
+        fontWeight: 600,
+        boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+        margin: 5,
+    },
+    btnContainer: {
+        justifyContent: "space-between",
+        marginTop: 25,
     }
 })
 
@@ -67,11 +118,11 @@ export default function Login() {
                     <Grid item xs={3}>
                         <img src={logo} alt="Emily Logo" style={{ width: '100%', paddingTop: '10px' }} />
                     </Grid>
-                    <Grid item xs={0} sm={5}></Grid>
-                    <Grid item xs={3} sm={2}>
+                    <Grid item md={5}></Grid>
+                    <Grid item xs={3} md={2}>
                         <Typography variant="body1" className={classes.homeText}>HOME</Typography>
                     </Grid>
-                    <Grid item xs={6} sm={2}>
+                    <Grid item xs={6} md={2}>
                         <Button
                             fullWidth
                             variant="contained"
@@ -83,9 +134,10 @@ export default function Login() {
                     </Grid>
                 </Grid>
                 <Grid container className={classes.loginBoxGrid}>
-                    <Grid xs={8}>
+                    <Grid item xs={9}>
                         <Card className={classes.loginCard}>
-                            <Typography variant="h5" align='center'>LOGIN</Typography>
+                            <Typography variant="h4" className={classes.loginText}>LOGIN</Typography>
+
                             <TextField
                                 fullWidth
                                 label="USERNAME"
@@ -94,6 +146,9 @@ export default function Login() {
                                 }}
                                 inputProps={{
                                     className: classes.inputProps
+                                }}
+                                classes={{
+                                    root: classes.inputField
                                 }}
                             />
                             <TextField
@@ -105,11 +160,48 @@ export default function Login() {
                                 inputProps={{
                                     className: classes.inputProps,
                                 }}
-                                classes={{
-                                    root: classes.inputField
-                                }}
-                                className={classes.inputField}
                             />
+                            <Typography variant="body1" className={classes.forgotPassword}>FORGOT PASSWORD?</Typography>
+                            <Button fullWidth
+                                variant="contained"
+                                className={classes.loginBtn}
+                                classes={{
+                                    contained: classes.loginContained,
+                                    label: classes.loginBtnText,
+                                }}
+                            >
+                                LOGIN
+                            </Button>
+                            <Grid container className={classes.btnContainer}>
+                                <Grid item xs={12} md={5}>
+                                    <Button
+                                        fullWidth
+                                        variant="contained"
+                                        className={classes.googleBtn}
+                                        classes={{
+                                            contained: classes.loginGContained,
+                                            label: classes.loginBtnText,
+                                        }}
+                                        startIcon={<img src={google} alt="google" style={{ width: "25px", height: "25px" }} />}
+                                    >
+                                        GOOGLE
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} md={5}>
+                                    <Button
+                                        fullWidth
+                                        variant="contained"
+                                        className={classes.facebookBtn}
+                                        classes={{
+                                            contained: classes.loginContained,
+                                            label: classes.loginBtnText,
+                                        }}
+                                        startIcon={<img src={facebook} alt="facebook" style={{ width: "25px", height: "25px" }} />}
+                                    >
+                                        FACEBOOK
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </Card>
                     </Grid>
                 </Grid>
