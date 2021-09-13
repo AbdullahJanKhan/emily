@@ -11,9 +11,6 @@ const useStyles = makeStyles({
     root: {
         flexGrow: 1,
     },
-    '@font-face': {
-        fontFamily: 'Montserrat, sans-serif'
-    },
     leftGrid: {
         borderRadius: "0px 50px 50px 0px",
         background: "linear-gradient(#1061b0 0%, #2374c6 48.66%, #3585da 100%)",
