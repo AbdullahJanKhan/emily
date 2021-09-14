@@ -12,6 +12,9 @@ const theme = createTheme({
   typography: {
     fontFamily: "Montserrat",
   },
+  listItemText: {
+    fontFamily: "Montserrat",
+  }
 });
 
 function App() {
