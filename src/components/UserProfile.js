@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { Button, Grid, makeStyles, Typography, Card, TextField } from '@material-ui/core';
+import { Grid, makeStyles, Typography, TextField } from '@material-ui/core';
 
-import { makeStyle } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     heading: {
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Userprofile() {
     const classes = useStyles();
     return (
-        <Grid item>
+        <Grid container>
             <Typography variant="h5" className={classes.heading}>User Profile</Typography>
             <Grid container className={classes.textfiledcontainer}>
                 <TextField
