@@ -2,6 +2,11 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import IconButton from '@material-ui/core/IconButton';
+
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
+import CloudDownloadOutlinedIcon from '@material-ui/icons/CloudDownloadOutlined';
+
 const useStyles = makeStyles({
   root: {
     margin: "auto",
@@ -43,7 +48,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: "35px",
-    padding: "12px",
+    padding: "0px 10px 0px 10px",
   },
   Reportheader: {
     width: "100%",
@@ -60,13 +65,17 @@ const useStyles = makeStyles({
     fontSize: "14px",
     color: "#fff",
   },
+  reportlistcontainer: {
+    marginBottom: "30px",
+    justifyContent: "center",
+  }
 });
 
 function Report() {
   const classes = useStyles();
   return (
     <Grid item xs={11} className={classes.Tablecontentbox}>
-      <Grid container>
+      <Grid container style={{ alignItems: "center" }}>
         <Grid item xs={4} sm={2} style={{ textAlign: 'start' }}>
           <Typography className={classes.TableContentFont}>01</Typography>
         </Grid>
@@ -82,7 +91,13 @@ function Report() {
           <Typography className={classes.TableContentFont}>10:27:31 AM</Typography>
         </Grid>
         <Grid item xs={12} sm={2} style={{ textAlign: 'start' }}>
-          <Typography className={classes.TableContentFont}>DOWNLOAD | VIEW</Typography>
+          <IconButton>
+            <CloudDownloadOutlinedIcon style={{ color: "#fff" }} />
+          </IconButton>
+          <Typography display="inline" style={{ color: "#fff", fontWeight: "bold" }}>|</Typography>
+          <IconButton>
+            <VisibilityOutlinedIcon style={{ color: "#fff" }} />
+          </IconButton>
         </Grid>
       </Grid>
     </Grid>
@@ -122,14 +137,11 @@ export default function Reports() {
               </Grid>
             </Grid>
           </Grid>
-          <Report />
-          <Report />
-          <Report />
-          <Report />
-          <Grid
-            container
-            style={{ marginBottom: "30px", justifyContent: "center" }}
-          >
+          <Grid container className={classes.reportlistcontainer}>
+            <Report />
+            <Report />
+            <Report />
+            <Report />
             <Report />
           </Grid>
         </Grid>
