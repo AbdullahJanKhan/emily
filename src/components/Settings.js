@@ -31,11 +31,14 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         background: "#fff",
         boxShadow: "6px 6px 10px rgba(0, 0, 0, 0.16)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
     },
     textfieldstyle: {
         borderRadius: 10,
         background: "#fff",
-        marginRight: 20,
+        width: "95%",
     },
     inputProps: {
         color: "#3585da",
@@ -47,121 +50,161 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
         color: "#fff",
         fontWeight: "bold",
+        width: "90%"
     }
 }))
 
 export default function Settings() {
     const classes = useStyles();
+    const [verify, setverify] = React.useState(false)
     return (
         <Grid className={classes.root}>
             <Typography variant="h5" className={classes.heading}>SETTINGS</Typography>
             <Grid item className={classes.row}>
                 <Typography variant="body1" className={classes.subheading}>CHANGE CONTACT NUMBER</Typography>
                 <Grid container className={classes.textfiledcontainer}>
-                    <TextField
-                        id="standard-number"
-                        label="Number"
-                        type="text"
-                        InputLabelProps={{
-                            shrink: true,
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        className={classes.textfieldstyle}
-                    />
-                    <TextField
-                        id="standard-number"
-                        label="Number"
-                        type="text"
-                        InputLabelProps={{
-                            shrink: true,
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        className={classes.textfieldstyle}
-                    />
-                    <Button className={classes.btn}>UPDATE</Button>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            fullWidth
+                            id="standard-number"
+                            label="Number"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                                className: classes.inputProps
+                            }}
+                            inputProps={{
+                                className: classes.inputProps,
+                            }}
+                            className={classes.textfieldstyle}
+                        />
+                    </Grid>
+                    {
+                        verify ?
+                            <Grid item xs={12} sm={3}>
+                                <TextField
+                                    fullWidth
+                                    id="standard-number"
+                                    label="Number"
+                                    type="text"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                        className: classes.inputProps
+                                    }}
+                                    inputProps={{
+                                        className: classes.inputProps,
+                                    }}
+                                    className={classes.textfieldstyle}
+                                />
+                            </Grid>
+                            :
+                            <Grid item sm={3} />
+                    }
+                    <Grid item sm={3} />
+                    <Grid xs={12} sm={3} style={{ alignItems: "center" }}>
+                        <Button
+                            className={classes.btn}
+                            fullWidth
+                            onClick={() => setverify(!verify)}
+                        >{verify ? "UPDATE" : "SEND OTP"}</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item className={classes.row}>
+                <Typography variant="body1" className={classes.subheading}>CHANGE EMAIL</Typography>
+                <Grid container className={classes.textfiledcontainer}>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            fullWidth
+                            id="standard-number"
+                            label="Number"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                                className: classes.inputProps
+                            }}
+                            inputProps={{
+                                className: classes.inputProps,
+                            }}
+                            className={classes.textfieldstyle}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            fullWidth
+                            id="standard-number"
+                            label="Number"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                                className: classes.inputProps
+                            }}
+                            inputProps={{
+                                className: classes.inputProps,
+                            }}
+                            className={classes.textfieldstyle}
+                        />
+                    </Grid>
+                    <Grid item sm={3} />
+                    <Grid xs={12} sm={3} style={{ alignItems: "center" }}>
+                        <Button className={classes.btn} fullWidth>UPDATE</Button>
+                    </Grid>
                 </Grid>
             </Grid>
             <Grid item className={classes.row}>
                 <Typography variant="body1" className={classes.subheading}>CHANGE CONTACT NUMBER</Typography>
                 <Grid container className={classes.textfiledcontainer}>
-                    <TextField
-                        id="standard-number"
-                        label="Number"
-                        type="text"
-                        InputLabelProps={{
-                            shrink: true,
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        className={classes.textfieldstyle}
-                    />
-                    <TextField
-                        id="standard-number"
-                        label="Number"
-                        type="text"
-                        InputLabelProps={{
-                            shrink: true,
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        className={classes.textfieldstyle}
-                    />
-                    <Button className={classes.btn}>UPDATE</Button>
-                </Grid>
-            </Grid>
-            <Grid item className={classes.row}>
-                <Typography variant="body1" className={classes.subheading}>CHANGE CONTACT NUMBER</Typography>
-                <Grid container className={classes.textfiledcontainer}>
-                    <TextField
-                        id="standard-number"
-                        label="Number"
-                        type="text"
-                        InputLabelProps={{
-                            shrink: true,
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        className={classes.textfieldstyle}
-                    />
-                    <TextField
-                        id="standard-number"
-                        label="Number"
-                        type="text"
-                        InputLabelProps={{
-                            shrink: true,
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        className={classes.textfieldstyle}
-                    />
-                    <TextField
-                        id="standard-number"
-                        label="Number"
-                        type="text"
-                        InputLabelProps={{
-                            shrink: true,
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        className={classes.textfieldstyle}
-                    />
-                    <Button className={classes.btn}>UPDATE</Button>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            fullWidth
+                            id="standard-number"
+                            label="Number"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                                className: classes.inputProps
+                            }}
+                            inputProps={{
+                                className: classes.inputProps,
+                            }}
+                            className={classes.textfieldstyle}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            fullWidth
+                            id="standard-number"
+                            label="Number"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                                className: classes.inputProps
+                            }}
+                            inputProps={{
+                                className: classes.inputProps,
+                            }}
+                            className={classes.textfieldstyle}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            fullWidth
+                            id="standard-number"
+                            label="Number"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                                className: classes.inputProps
+                            }}
+                            inputProps={{
+                                className: classes.inputProps,
+                            }}
+                            className={classes.textfieldstyle}
+                        />
+                    </Grid>
+                    <Grid xs={12} sm={3} style={{ alignItems: "center" }}>
+                        <Button className={classes.btn} fullWidth>UPDATE</Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
