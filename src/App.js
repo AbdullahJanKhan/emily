@@ -6,9 +6,10 @@ import "./App.css";
 // import UserProfile from './components/UserProfile';
 // import Login from './pages/login';
 // import Signup from './pages/signup';
-import Settings from './pages/settings';
+//import Settings from './pages/settings';
 // import Report from './pages/reports';
 // import Profile from './pages/profile';
+import Startsession from './components/start_session';
 
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
@@ -25,7 +26,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Settings />
+        <Startsession />
       </div>
     </ThemeProvider>
   );
