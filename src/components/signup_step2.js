@@ -10,6 +10,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import sms from "../emily/sms.svg";
 import email from "../emily/email.svg";
 
+import { useFormik } from 'formik';
+import { validatePin } from '../pages/yup';
+
 const useStyles = makeStyles({
     inputProps: {
         color: "#7ea2c4",
@@ -55,63 +58,91 @@ const useStyles = makeStyles({
 
 export default function Step2({ setActiveStep }) {
     const classes = useStyles();
+    const formik = useFormik({
+        initialValues: {
+            smspin: "",
+            emailpin: "",
+        },
+        validationSchema: validatePin,
+        onSubmit: (values) => {
+            console.log(values)
+            alert(JSON.stringify(values))
+            setActiveStep(2)
+        },
+    })
+
     return (
         <Grid>
             <Typography variant="h5" className={classes.typographyText}>VERIFICATION</Typography>
             <Typography
                 variant="subtitle2"
                 className={classes.typographyTextSub}
-            >PLEASE ENTER OTP RECIEVED VIA EMAIL AND SMS</Typography>
-            <TextField
-                fullWidth
-                type="text"
-                InputLabelProps={{
-                    className: classes.inputProps
-                }}
-                inputProps={{
-                    className: classes.inputProps,
-                }}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment>
-                            <img src={sms} alt="SMS icon" className={classes.startIcon} />
-                        </InputAdornment>
-                    )
-                }}
-            />
-            <TextField
-                fullWidth
-                type="text"
-                InputLabelProps={{
-                    className: classes.inputProps
-                }}
-                inputProps={{
-                    className: classes.inputProps,
-                }}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment>
-                            <img src={email} alt="Email icon" className={classes.startIcon} />
-                        </InputAdornment>
-                    )
-                }}
-            />
-            <Grid>
-                <Typography variant="overline" className={classes.typographyText}>
-                    RESEND OTP IN 30 SECONDS
-                </Typography>
-            </Grid>
-            <Button fullWidth
-                variant="contained"
-                className={classes.Btn}
-                classes={{
-                    contained: classes.Contained,
-                    label: classes.BtnText,
-                }}
-                onClick={() => setActiveStep(2)}
             >
-                CONTINUE
-            </Button>
+                PLEASE ENTER OTP RECIEVED VIA EMAIL AND SMS
+            </Typography>
+            <form onSubmit={formik.handleSubmit}>
+                <TextField
+                    fullWidth
+                    type="text"
+                    name="smspin"
+                    InputLabelProps={{
+                        className: classes.inputProps
+                    }}
+                    inputProps={{
+                        className: classes.inputProps,
+                    }}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment>
+                                <img src={sms} alt="SMS icon" className={classes.startIcon} />
+                            </InputAdornment>
+                        )
+                    }}
+                    value={formik.values.smspin}
+                    onChange={formik.handleChange}
+                    error={formik.touched.smspin && Boolean(formik.errors.smspin)}
+                    helperText={formik.touched.smspin && formik.errors.smspin}
+                />
+                <TextField
+                    fullWidth
+                    type="text"
+                    name="emailpin"
+                    InputLabelProps={{
+                        className: classes.inputProps
+                    }}
+                    inputProps={{
+                        className: classes.inputProps,
+                    }}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment>
+                                <img src={email} alt="Email icon" className={classes.startIcon} />
+                            </InputAdornment>
+                        )
+                    }}
+                    value={formik.values.emailpin}
+                    onChange={formik.handleChange}
+                    error={formik.touched.emailpin && Boolean(formik.errors.emailpin)}
+                    helperText={formik.touched.emailpin && formik.errors.emailpin}
+                />
+                <Grid>
+                    <Typography variant="overline" className={classes.typographyText}>
+                        RESEND OTP IN 30 SECONDS
+                    </Typography>
+                </Grid>
+                <Button
+                    fullWidth
+                    variant="contained"
+                    type="submit"
+                    className={classes.Btn}
+                    classes={{
+                        contained: classes.Contained,
+                        label: classes.BtnText,
+                    }}
+                >
+                    CONTINUE
+                </Button>
+            </form>
         </Grid>
     )
 }

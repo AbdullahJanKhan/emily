@@ -6,6 +6,20 @@ import logo from '../emily/logo.svg';
 import google from "../emily/google.svg";
 import facebook from "../emily/facebook.svg";
 
+import * as yup from "yup";
+import { useFormik } from "formik";
+
+const validationSchema = yup.object({
+    username: yup
+        .string('Enter your email')
+        .email('Enter a valid email')
+        .required('Email is required'),
+    password: yup
+        .string('Enter your password')
+        .min(8, 'Password should be of minimum 8 characters length')
+        .max(16, 'Password should be of maximum 16 characters length')
+        .required('Password is required'),
+});
 
 const useStyles = makeStyles({
     root: {
@@ -105,8 +119,18 @@ const useStyles = makeStyles({
 })
 
 export default function Login() {
-
     const classes = useStyles();
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            console.log(values)
+            alert(JSON.stringify(values))
+        },
+    });
 
     return (
         <Grid container className={classes.root}>
@@ -134,41 +158,53 @@ export default function Login() {
                     <Grid item xs={9}>
                         <Card className={classes.loginCard}>
                             <Typography variant="h4" className={classes.loginText}>LOGIN</Typography>
-
-                            <TextField
-                                fullWidth
-                                label="USERNAME"
-                                InputLabelProps={{
-                                    className: classes.inputProps
-                                }}
-                                inputProps={{
-                                    className: classes.inputProps
-                                }}
-                                classes={{
-                                    root: classes.inputField
-                                }}
-                            />
-                            <TextField
-                                label="PASSWORD"
-                                fullWidth
-                                InputLabelProps={{
-                                    className: classes.inputProps
-                                }}
-                                inputProps={{
-                                    className: classes.inputProps,
-                                }}
-                            />
-                            <Typography variant="body1" className={classes.forgotPassword}>FORGOT PASSWORD?</Typography>
-                            <Button fullWidth
-                                variant="contained"
-                                className={classes.loginBtn}
-                                classes={{
-                                    contained: classes.loginContained,
-                                    label: classes.loginBtnText,
-                                }}
-                            >
-                                LOGIN
-                            </Button>
+                            <form onSubmit={formik.handleSubmit}>
+                                <TextField
+                                    fullWidth
+                                    label="USERNAME"
+                                    name="username"
+                                    InputLabelProps={{
+                                        className: classes.inputProps
+                                    }}
+                                    inputProps={{
+                                        className: classes.inputProps
+                                    }}
+                                    classes={{
+                                        root: classes.inputField
+                                    }}
+                                    value={formik.values.username}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.username && Boolean(formik.errors.username)}
+                                    helperText={formik.touched.username && formik.errors.username}
+                                />
+                                <TextField
+                                    label="PASSWORD"
+                                    name="password"
+                                    fullWidth
+                                    InputLabelProps={{
+                                        className: classes.inputProps
+                                    }}
+                                    inputProps={{
+                                        className: classes.inputProps,
+                                    }}
+                                    value={formik.values.password}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.password && Boolean(formik.errors.password)}
+                                    helperText={formik.touched.password && formik.errors.password}
+                                />
+                                <Typography variant="body1" className={classes.forgotPassword}>FORGOT PASSWORD?</Typography>
+                                <Button fullWidth
+                                    variant="contained"
+                                    className={classes.loginBtn}
+                                    classes={{
+                                        contained: classes.loginContained,
+                                        label: classes.loginBtnText,
+                                    }}
+                                    type="submit"
+                                >
+                                    LOGIN
+                                </Button>
+                            </form>
                             <Grid container className={classes.btnContainer}>
                                 <Grid item xs={12} md={5}>
                                     <Button
