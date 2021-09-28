@@ -9,6 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import { useFormik } from 'formik';
 import { userprofile } from '../pages/yup';
 
+import { useSelector, useDispatch } from "react-redux";
+import { setuser, settoken } from "../pages/stateSlice";
+import axios from "axios";
+
+
 const useStyles = makeStyles({
     inputProps: {
         color: "#7ea2c4",
@@ -24,8 +29,6 @@ const useStyles = makeStyles({
         color: "#fff",
         marginTop: 15,
         marginBottom: 15,
-    },
-    BtnContained: {
         "&:hover": {
             background: "rgba(53,133,218,0.8)",
         }
@@ -57,6 +60,8 @@ const useStyles = makeStyles({
 
 export default function Step3({ setActiveStep }) {
     const classes = useStyles();
+    const user = useSelector((state) => state.states.user)
+    const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
             fullname: "",
@@ -67,9 +72,16 @@ export default function Step3({ setActiveStep }) {
         },
         validationSchema: userprofile,
         onSubmit: (values) => {
+            values = { ...values, user: user }
             console.log(values)
-            alert(JSON.stringify(values))
-            setActiveStep(3)
+            axios.post("http://localhost:5000/users/complete_profile", values)
+                .then(res => {
+                    if (res.data.success) {
+                        dispatch(setuser(res.data.user))
+                        dispatch(settoken(res.data.token))
+                        setActiveStep(3)
+                    }
+                })
         },
     })
 

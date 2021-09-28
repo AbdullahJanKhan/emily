@@ -9,6 +9,11 @@ import facebook from "../emily/facebook.svg";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
+import { useDispatch } from "react-redux";
+import { login, setuser, settoken } from "../pages/stateSlice";
+import axios from "axios";
+
+
 const validationSchema = yup.object({
     username: yup
         .string('Enter your email')
@@ -120,6 +125,7 @@ const useStyles = makeStyles({
 
 export default function Login() {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -127,8 +133,14 @@ export default function Login() {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            console.log(values)
-            alert(JSON.stringify(values))
+            axios.post("http://localhost:5000/user/login", values)
+                .then(res => {
+                    if (res.data.success) {
+                        dispatch(setuser(res.data.user))
+                        dispatch(settoken(res.data.token))
+                        dispatch(login())
+                    }
+                })
         },
     });
 

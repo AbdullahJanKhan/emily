@@ -9,6 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import { useFormik } from 'formik';
 import { basicVal } from '../pages/yup';
 
+import axios from "axios";
+
+import { setuser } from "../pages/stateSlice";
+import { useDispatch } from "react-redux";
+
 const useStyles = makeStyles({
     inputProps: {
         color: "#7ea2c4",
@@ -24,8 +29,6 @@ const useStyles = makeStyles({
         color: "#fff",
         marginTop: 10,
         marginBottom: 5,
-    },
-    BtnContained: {
         "&:hover": {
             background: "rgba(53,133,218,0.8)",
         }
@@ -51,6 +54,9 @@ const useStyles = makeStyles({
 
 export default function Step1({ setActiveStep }) {
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+
     const formik = useFormik({
         initialValues: {
             username: "",
@@ -62,8 +68,13 @@ export default function Step1({ setActiveStep }) {
         validationSchema: basicVal,
         onSubmit: (values) => {
             console.log(values)
-            alert(JSON.stringify(values))
-            setActiveStep(1);
+            axios.post("http://localhost:5000/users/signup", values)
+                .then(res => {
+                    if (res.data.success) {
+                        dispatch(setuser(res.data.user))
+                        setActiveStep(1);
+                    }
+                })
         },
     })
     return (

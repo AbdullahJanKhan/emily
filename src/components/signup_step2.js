@@ -12,6 +12,10 @@ import email from "../emily/email.svg";
 
 import { useFormik } from 'formik';
 import { validatePin } from '../pages/yup';
+import { useSelector, useDispatch } from "react-redux";
+import { setuser } from "../pages/stateSlice";
+
+import axios from "axios";
 
 const useStyles = makeStyles({
     inputProps: {
@@ -27,8 +31,6 @@ const useStyles = makeStyles({
         color: "#fff",
         marginTop: 10,
         marginBottom: 15,
-    },
-    BtnContained: {
         "&:hover": {
             background: "rgba(53,133,218,0.8)",
         }
@@ -58,6 +60,9 @@ const useStyles = makeStyles({
 
 export default function Step2({ setActiveStep }) {
     const classes = useStyles();
+    const user = useSelector((state) => state.states.user);
+    const dispatch = useDispatch();
+
     const formik = useFormik({
         initialValues: {
             smspin: "",
@@ -65,9 +70,15 @@ export default function Step2({ setActiveStep }) {
         },
         validationSchema: validatePin,
         onSubmit: (values) => {
+            values = { ...values, user: user }
             console.log(values)
-            alert(JSON.stringify(values))
-            setActiveStep(2)
+            axios.post("http://localhost:5000/users/verify", values)
+                .then(res => {
+                    if (res.data.success) {
+                        dispatch(setuser(res.data.user))
+                        setActiveStep(2)
+                    }
+                })
         },
     })
 
