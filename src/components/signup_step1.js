@@ -161,7 +161,7 @@ export default function Step1({ setActiveStep }) {
                 />
                 <TextField
                     fullWidth
-                    label="CONTACT NUMBER"
+                    label="0092XXXXXXXXXX"
                     type="text"
                     name="phone_number"
                     className={classes.inputField}
