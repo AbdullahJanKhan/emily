@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Button, Grid, makeStyles, Typography, Card, TextField } from '@material-ui/core';
 
-import logo from '../emily/logo.svg';
+import logo from '../emily/Emily Logo-01.png';
 import google from "../emily/google.svg";
 import facebook from "../emily/facebook.svg";
+import Emily from "../animations/emily_login.mp4";
 
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -31,22 +32,22 @@ const useStyles = makeStyles({
         flexGrow: 1,
     },
     leftGrid: {
-        borderRadius: "0px 50px 50px 0px",
-        background: "linear-gradient(#1061b0 0%, #2374c6 48.66%, #3585da 100%)",
-        boxShadow: "6px 6px 10px rgba(0, 0, 0, 0.16)",
+        background: "#fff",
         minHeight: "100vh",
+        boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
     },
     leftGridHeaderBtn: {
-        borderRadius: "0px 50px 0px 50px",
+        borderRadius: "3%",
         boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
-        background: "#3585da",
-        color: "#fff",
+        background: "#fff",
+        color: "#1061b0",
         fontWeight: 'bold',
         overflow: 'hidden',
         right: 5,
+
     },
     homeText: {
-        color: "#fff",
+        color: "#3585da",
         fontWeight: 'bold',
         padding: "5px 10px 0px 10px",
     },
@@ -60,6 +61,7 @@ const useStyles = makeStyles({
         textAlign: "center",
     },
     loginCard: {
+        borderRadius: "3%",
         justifyContent: "center",
         textAling: "center",
         marginTop: 100,
@@ -120,6 +122,15 @@ const useStyles = makeStyles({
     btnContainer: {
         justifyContent: "space-between",
         marginTop: 25,
+    },
+    videoDim: {
+        position: 'absolute',
+        right: '0',
+        bottom: '0',
+        minWidth: '100vw',
+        height: '100vh',
+        objectFit: "cover",
+        zIndex: '-1'
     }
 })
 
@@ -147,9 +158,9 @@ export default function Login() {
     return (
         <Grid container className={classes.root}>
             <Grid item sm={6} className={classes.leftGrid}>
-                <Grid container>
+                <Grid container direction="row" justifyContent="space-between" alignItems="center" >
                     <Grid item xs={3}>
-                        <img src={logo} alt="Emily Logo" style={{ width: '100%', paddingTop: '10px' }} />
+                        <img src={logo} alt="Emily Logo" style={{ width: '80px', paddingTop: '10px', paddingLeft: '20px' }} />
                     </Grid>
                     <Grid item md={5}></Grid>
                     <Grid item xs={3} md={2}>
@@ -162,7 +173,7 @@ export default function Login() {
                             className={classes.leftGridHeaderBtn}
                             classes={{
                                 contained: classes.contained
-                            }}
+                            }} href="/signup"
                         >SIGN UP</Button>
                     </Grid>
                 </Grid>
@@ -252,6 +263,12 @@ export default function Login() {
                 </Grid>
             </Grid>
             <Grid item sm={6}></Grid>
+            <Grid item xs={12}>
+                <video autoPlay loop muted className={classes.videoDim}>
+                    <source src={Emily} type="video/mp4" />
+                </video>
+
+            </Grid>
         </Grid>
     )
 }
