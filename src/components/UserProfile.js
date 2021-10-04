@@ -43,8 +43,8 @@ export default function Userprofile() {
                     <TextField
                         fullWidth
                         id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
+                        label="PATIENT ID"
+                        defaultValue="31221321"
                         InputProps={{
                             readOnly: true,
                         }}
@@ -62,8 +62,8 @@ export default function Userprofile() {
                     <TextField
                         fullWidth
                         id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
+                        label="USERNAME"
+                        defaultValue="HADIABID98"
                         InputProps={{
                             readOnly: true,
                         }}
@@ -81,67 +81,8 @@ export default function Userprofile() {
                     <TextField
                         fullWidth
                         id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
-                        InputProps={{
-                            readOnly: true,
-                        }}
-                        InputLabelProps={{
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        variant="outlined"
-                        className={classes.textfieldstyle}
-                    />
-                </Grid>
-            </Grid>
-            <Grid container className={classes.textfiledcontainer}>
-                <Grid item xs={12} sm={4}>
-                    <TextField
-                        fullWidth
-                        id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
-                        InputProps={{
-                            readOnly: true,
-                        }}
-                        InputLabelProps={{
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        variant="outlined"
-                        className={classes.textfieldstyle}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <TextField
-                        fullWidth
-                        id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
-                        InputProps={{
-                            readOnly: true,
-                        }}
-                        InputLabelProps={{
-                            className: classes.inputProps
-                        }}
-                        inputProps={{
-                            className: classes.inputProps,
-                        }}
-                        variant="outlined"
-                        className={classes.textfieldstyle}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <TextField
-                        fullWidth
-                        id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
+                        label="FULL NAME"
+                        defaultValue="ABDUL HADI ABID"
                         InputProps={{
                             readOnly: true,
                         }}
@@ -161,8 +102,8 @@ export default function Userprofile() {
                     <TextField
                         fullWidth
                         id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
+                        label="EMAIL ADDRESS"
+                        defaultValue="HADI98ABDUL@GMAIL.COM"
                         InputProps={{
                             readOnly: true,
                         }}
@@ -180,8 +121,8 @@ export default function Userprofile() {
                     <TextField
                         fullWidth
                         id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
+                        label="PCONTACT NUMBER"
+                        defaultValue="+923143037736"
                         InputProps={{
                             readOnly: true,
                         }}
@@ -199,8 +140,67 @@ export default function Userprofile() {
                     <TextField
                         fullWidth
                         id="outlined-read-only-input"
-                        label="PatientID"
-                        defaultValue="Hello World"
+                        label="OCCUPATION"
+                        defaultValue="STUDENT"
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        InputLabelProps={{
+                            className: classes.inputProps
+                        }}
+                        inputProps={{
+                            className: classes.inputProps,
+                        }}
+                        variant="outlined"
+                        className={classes.textfieldstyle}
+                    />
+                </Grid>
+            </Grid>
+            <Grid container className={classes.textfiledcontainer}>
+                <Grid item xs={12} sm={4}>
+                    <TextField
+                        fullWidth
+                        id="outlined-read-only-input"
+                        label="COUNTRY"
+                        defaultValue="PAKISTAN"
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        InputLabelProps={{
+                            className: classes.inputProps
+                        }}
+                        inputProps={{
+                            className: classes.inputProps,
+                        }}
+                        variant="outlined"
+                        className={classes.textfieldstyle}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <TextField
+                        fullWidth
+                        id="outlined-read-only-input"
+                        label="GENDER"
+                        defaultValue="MALE"
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        InputLabelProps={{
+                            className: classes.inputProps
+                        }}
+                        inputProps={{
+                            className: classes.inputProps,
+                        }}
+                        variant="outlined"
+                        className={classes.textfieldstyle}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <TextField
+                        fullWidth
+                        id="outlined-read-only-input"
+                        label="DATE OF BIRTH"
+                        defaultValue="23/05/1999"
                         InputProps={{
                             readOnly: true,
                         }}

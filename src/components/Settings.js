@@ -70,7 +70,7 @@ export default function Settings() {
                         <TextField
                             fullWidth
                             id="standard-number"
-                            label="Contact Number"
+                            label="CONTACT NUMBER"
                             type="text"
                             InputLabelProps={{
                                 shrink: true,
@@ -88,7 +88,7 @@ export default function Settings() {
                                 <TextField
                                     fullWidth
                                     id="standard-number"
-                                    label="OTP"
+                                    label="OTP (RESEND IN 30 SECONDS)"
                                     type="text"
                                     InputLabelProps={{
                                         shrink: true,
@@ -155,7 +155,7 @@ export default function Settings() {
                 </Grid>
             </Grid>
             <Grid item className={classes.row}>
-                <Typography variant="body1" className={classes.subheading}>CHANGE Password</Typography>
+                <Typography variant="body1" className={classes.subheading}>CHANGE PASSWORD</Typography>
                 <Grid container className={classes.textfiledcontainer}>
                     <Grid item xs={12} sm={3}>
                         <TextField
