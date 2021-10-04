@@ -41,6 +41,7 @@ const useStyles = makeStyles({
     typographyText: {
         fontWeight: 700,
         textAlign: "center",
+        textDecoration: 'underline',
     },
     btmText: {
         textAlign: "center",
@@ -182,7 +183,7 @@ export default function Step1({ setActiveStep }) {
                 <Typography variant="body2" display="inline">
                     HAVE AN ACCOUNT?
                 </Typography>
-                <Typography variant="body2" className={classes.typographyText} display="inline">SIGNIN</Typography>
+                <Typography variant="body2" className={classes.typographyText} display="inline" href="/login"> SIGNIN</Typography>
             </Grid>
         </Grid>
     )
