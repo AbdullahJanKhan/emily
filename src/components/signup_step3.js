@@ -11,7 +11,15 @@ import { userprofile } from '../pages/yup';
 
 import { useSelector, useDispatch } from "react-redux";
 import { setuser, settoken, login } from "../pages/stateSlice";
+
 import axios from "axios";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 
 const useStyles = makeStyles({
@@ -62,6 +70,20 @@ export default function Step3({ setActiveStep }) {
     const classes = useStyles();
     const user = useSelector((state) => state.states.user)
     const dispatch = useDispatch();
+    const [snackbar, setsnackbar] = React.useState({
+        open: false,
+        msg: "",
+        type: ""
+    })
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setsnackbar({ ...snackbar, open: false });
+    };
+
+
     const formik = useFormik({
         initialValues: {
             fullname: "",
@@ -77,10 +99,32 @@ export default function Step3({ setActiveStep }) {
             axios.post("http://localhost:5000/users/complete_profile", values)
                 .then(res => {
                     if (res.data.success) {
-                        dispatch(setuser(res.data.user))
-                        dispatch(settoken(res.data.token))
-                        dispatch(login())
+                        setsnackbar({
+                            ...snackbar,
+                            open: true,
+                            msg: "User Profiling Complete!",
+                            type: "success"
+                        })
+                        setTimeout(() => {
+                            dispatch(setuser(res.data.user));
+                            setActiveStep(3);
+                        }, 1000)
+                    } else {
+                        setsnackbar({
+                            ...snackbar,
+                            open: true,
+                            msg: "Incomplete User profiling",
+                            type: "error"
+                        })
                     }
+                })
+                .catch(err => {
+                    setsnackbar({
+                        ...snackbar,
+                        open: true,
+                        msg: "Incomplete User profiling",
+                        type: "error"
+                    })
                 })
         },
     })
@@ -190,6 +234,14 @@ export default function Step3({ setActiveStep }) {
                     SIGNUP
                 </Button>
             </form>
+            <Snackbar open={snackbar.open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity={snackbar.type}>
+                    {snackbar.msg}
+                </Alert>
+            </Snackbar>
         </Grid>
     )
 }
