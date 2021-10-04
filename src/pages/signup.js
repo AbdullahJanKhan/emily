@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Emily from "../animations/emily_login.mp4";
 
 import { Button, Grid, makeStyles, Typography, Card } from '@material-ui/core';
 
@@ -11,7 +12,7 @@ import StepConnector from '@material-ui/core/StepConnector';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 
-import logo from '../emily/logo.svg';
+import logo from '../emily/Emily Logo-01.png';
 import tick from '../emily/tick.svg';
 
 import Step1 from '../components/signup_step1';
@@ -39,28 +40,35 @@ function getStepContent(stepIndex, setActiveStep) {
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
-        maxHeight: "100vh"
+        height: "100vh",
+
+        overflow: "hidden"
     },
     '@font-face': {
         fontFamily: 'Montserrat, sans-serif'
+
     },
     leftGrid: {
-        borderRadius: "0px 50px 50px 0px",
-        background: "linear-gradient(#1061b0 0%, #2374c6 48.66%, #3585da 100%)",
-        boxShadow: "6px 6px 10px rgba(0, 0, 0, 0.16)",
+        background: "#fff",
+        minHeight: "100vh",
+        boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+    },
+    rightGrid: {
         minHeight: "100vh",
     },
+
     leftGridHeaderBtn: {
-        borderRadius: "0px 50px 0px 50px",
+        borderRadius: "3%",
         boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
-        background: "#3585da",
-        color: "#fff",
+        background: "#fff",
+        color: "#1061b0",
         fontWeight: 'bold',
         overflow: 'hidden',
         right: 5,
+
     },
     homeText: {
-        color: "#fff",
+        color: "#3585da",
         fontWeight: 'bold',
         padding: "5px 10px 0px 10px",
     },
@@ -73,10 +81,13 @@ const useStyles = makeStyles({
         textAlign: "center",
     },
     loginCard: {
+        borderRadius: "3%",
         justifyContent: "center",
-        textAling: "center",
+        textAlign: "center",
         color: '#1061b0',
-        marginTop: "10%"
+        marginTop: "10%",
+        boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+
     },
     inputProps: {
         color: "#7ea2c4",
@@ -87,7 +98,7 @@ const useStyles = makeStyles({
     },
     contained: {
         "&:hover": {
-            background: "rgba(53,133,218,0.8)"
+            background: "rgba(53,133,218,0.2)"
         }
     },
     steproot: {
@@ -102,6 +113,15 @@ const useStyles = makeStyles({
     stepper: {
         padding: 5,
         margin: 0,
+    },
+    videoDim: {
+        position: 'absolute',
+        right: '0',
+        bottom: '0',
+        minWidth: '100vw',
+        height: '100vh',
+        objectFit: "cover",
+        zIndex: '-1'
     }
 })
 
@@ -197,55 +217,74 @@ export default function Signup() {
     const steps = getSteps();
 
     return (
-        <Grid container className={classes.root}>
-            <Grid item xs={12} md={6} className={classes.leftGrid}>
-                <Grid container>
-                    <Grid item xs={3}>
-                        <img src={logo} alt="Emily Logo" style={{ width: '100%', paddingTop: '10px' }} />
+
+            <Grid container className={classes.root}>
+                <Grid item xs={12} md={6} className={classes.leftGrid}>
+
+                <Grid container direction="row" justifyContent="space-between" alignItems="center" >
+                        <Grid item xs={3}>
+                        <img src={logo} alt="Emily Logo" style={{ width: '80px', paddingTop: '10px', paddingLeft: '20px' }} />
+                        </Grid>
+                        <Grid item md={5}></Grid>
+                        <Grid item xs={3} md={2}>
+                            <Typography variant="body1" className={classes.homeText}>HOME</Typography>
+                        </Grid>
+                        <Grid item xs={6} md={2}>
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                className={classes.leftGridHeaderBtn}
+                                classes={{
+                                    contained: classes.contained
+                                }}
+                            >SIGN IN</Button>
+                        </Grid>
                     </Grid>
-                    <Grid item md={5}></Grid>
-                    <Grid item xs={3} md={2}>
-                        <Typography variant="body1" className={classes.homeText}>HOME</Typography>
-                    </Grid>
-                    <Grid item xs={6} md={2}>
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            className={classes.leftGridHeaderBtn}
-                            classes={{
-                                contained: classes.contained
-                            }}
-                        >SIGN IN</Button>
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.loginBoxGrid}>
-                    <Grid item xs={11} sm={8} className={classes.steproot}>
-                        <Card className={classes.loginCard}>
-                            <Grid item xs={12}>
-                                <Stepper
-                                    activeStep={activeStep}
-                                    alternativeLabel
-                                    connector={<ColorlibConnector />}
-                                    className={classes.stepper}
-                                >
-                                    {steps.map((label) => (
-                                        <Step key={label}>
-                                            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-                                        </Step>
-                                    ))}
-                                </Stepper>
-                            </Grid>
-                            <Grid container>
-                                <Grid item sm={1}></Grid>
-                                <Grid item xs={12} sm={10}>
-                                    {getStepContent(activeStep, setActiveStep)}
+                    <Grid container className={classes.loginBoxGrid}>
+                        <Grid item xs={11} sm={8} className={classes.steproot}>
+                            <Card className={classes.loginCard}>
+                                <Grid item xs={12}>
+                                    <Stepper
+                                        activeStep={activeStep}
+                                        alternativeLabel
+                                        connector={<ColorlibConnector />}
+                                        className={classes.stepper}
+                                    >
+                                        {steps.map((label) => (
+                                            <Step key={label}>
+                                                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                                            </Step>
+                                        ))}
+                                    </Stepper>
                                 </Grid>
-                            </Grid>
-                        </Card>
+                                <Grid container>
+                                    <Grid item sm={1}></Grid>
+                                    <Grid item xs={12} sm={10}>
+                                        {getStepContent(activeStep, setActiveStep)}
+                                    </Grid>
+                                </Grid>
+                            </Card>
+                        </Grid>
                     </Grid>
                 </Grid>
+
+
+
+            <Grid item xs={12}>
+                <video autoPlay loop muted className={classes.videoDim}>
+                    <source src={Emily} type="video/mp4" />
+                </video>
+
             </Grid>
-            <Grid item md={6} xs={12}></Grid>
         </Grid>
+
     )
 }
+
+{/* 
+
+         */}
+
+{/* <video autoPlay muted className={classes.videoDim}>
+                        <source src={Emily} type="video/mp4" />
+                    </video> */}
