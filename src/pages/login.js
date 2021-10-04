@@ -55,6 +55,9 @@ const useStyles = makeStyles({
         color: "#3585da",
         fontWeight: 'bold',
         padding: "5px 10px 0px 10px",
+        "&:hover": {
+            cursor: "pointer"
+        }
     },
     loginBoxGrid: {
         justifyContent: 'center',

@@ -22,7 +22,7 @@ export const stateSlice = createSlice({
         setuser: (state, action) => {
             state.user = action.payload;
             state.name = action.payload.name ? action.payload.name.split(' ')[0] : "";
-            state.id = action.payload._id;
+            state.id = action.payload._id.slice(0, 10);
         },
     },
 })
