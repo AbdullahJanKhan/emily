@@ -95,8 +95,7 @@ router.post('/complete_profile', (req, res) => {
         message: err.name
       })
     } else if (user) {
-      user.fname = req.body.fname
-      user.lname = req.body.lname
+      user.name = req.body.name
       user.age = req.body.age
       user.country = req.body.country
       user.dob = req.body.dob

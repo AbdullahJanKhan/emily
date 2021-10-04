@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const stateSlice = createSlice({
     name: 'states',
     initialState: {
-        islogin: true,
+        islogin: false,
         user: {},
         token: '',
         name: "",
@@ -21,7 +21,7 @@ export const stateSlice = createSlice({
         },
         setuser: (state, action) => {
             state.user = action.payload;
-            state.name = action.payload.fname + " " + action.payload.lname;
+            state.name = action.payload.name.split(' ')[0];
             state.id = action.payload._id
         },
     },

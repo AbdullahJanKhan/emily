@@ -10,7 +10,7 @@ import { useFormik } from 'formik';
 import { userprofile } from '../pages/yup';
 
 import { useSelector, useDispatch } from "react-redux";
-import { setuser, settoken } from "../pages/stateSlice";
+import { setuser, settoken, login } from "../pages/stateSlice";
 import axios from "axios";
 
 
@@ -79,7 +79,7 @@ export default function Step3({ setActiveStep }) {
                     if (res.data.success) {
                         dispatch(setuser(res.data.user))
                         dispatch(settoken(res.data.token))
-                        setActiveStep(3)
+                        dispatch(login())
                     }
                 })
         },

@@ -17,9 +17,8 @@ import axios from "axios";
 
 const validationSchema = yup.object({
     username: yup
-        .string('Enter your email')
-        .email('Enter a valid email')
-        .required('Email is required'),
+        .string('Enter your Username')
+        .required('Username is required'),
     password: yup
         .string('Enter your password')
         .min(8, 'Password should be of minimum 8 characters length')
@@ -144,7 +143,7 @@ export default function Login() {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            axios.post("http://localhost:5000/user/login", values)
+            axios.post("http://localhost:5000/users/login", values)
                 .then(res => {
                     if (res.data.success) {
                         dispatch(setuser(res.data.user))
@@ -203,6 +202,7 @@ export default function Login() {
                                 <TextField
                                     label="PASSWORD"
                                     name="password"
+                                    type='password'
                                     fullWidth
                                     InputLabelProps={{
                                         className: classes.inputProps

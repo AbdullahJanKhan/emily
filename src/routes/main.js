@@ -33,6 +33,9 @@ export default function Routes() {
                         <Route path="/profile">
                             <Profile />
                         </Route>
+                        <Route path="*">
+                            <Redirect to='/' />
+                        </Route>
                     </Switch>
                     :
                     <Switch>
