@@ -4,7 +4,17 @@ var router = express.Router();
 var User = require('../model/User');
 var passport = require('passport');
 var authenticate = require('../authenticate');
+const nodemailer = require('nodemailer');
 
+const sender = 'your-email';
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: sender,
+    pass: 'yourpassword'
+  }
+});
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -127,6 +137,25 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     user: req.user
   });
 });
+
+router.post('/sendCode', (req, res, next) => {
+  const code = parseInt(Math.random() * 10000);
+  const email = req.body.email;
+  var mailOptions = {
+    from: sender,
+    to: email,
+    subject: 'Verification Code Argi',
+    text: 'Verification Code is ' + String(code)
+  };
+  transporter.sendMail(mailOptions, function (err, info) {
+    if (err) {
+      console.log(err)
+      res.json({ err: err, info: info })
+    } else {
+      res.json({ data: 'Email sent: ' + info.response, code: code, success: true });
+    }
+  });
+})
 
 
 module.exports = router;

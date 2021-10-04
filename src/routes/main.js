@@ -6,6 +6,7 @@ import Reports from "../pages/reports";
 import Profile from "../pages/profile";
 import Settings from "../pages/Settings";
 import Homepage from "../pages/Homepage";
+import Dashboard from "../pages/dashboard"
 
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
@@ -20,6 +21,9 @@ export default function Routes() {
             {
                 islogin ?
                     <Switch>
+                        <Route exact path="/">
+                            <Dashboard />
+                        </Route>
                         <Route path="/reports">
                             <Reports />
                         </Route>

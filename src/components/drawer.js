@@ -8,17 +8,19 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import clsx from 'clsx';
 
-import logo from '../emily/logo.svg';
+import logo from '../emily/emily white logo-01.png';
 import dashboard from '../emily/dashboard.svg';
 import report from '../emily/report.svg';
-import logout from '../emily/logout.svg';
+import logouticn from '../emily/logout.svg';
 import setting from '../emily/setting.svg';
 import user from '../emily/user.svg';
 import drawerOpen from '../emily/drawerIconOpen.svg';
 import drawerClose from '../emily/drawerIconClose.svg';
 
 import { Grid, Typography } from '@material-ui/core';
-
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../pages/stateSlice";
 const drawerWidth = 220;
 
 const useStyles = makeStyles((theme) => ({
@@ -100,14 +102,13 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 'auto',
-        width: 150,
+        width: 85,
         padding: 0,
     },
     listItemLogoClose: {
         justifyContent: 'flex-start',
         alignItems: 'center',
-        width: 100,
-        height: 40,
+        width: 80,
         margin: 0,
         padding: 0,
     },
@@ -147,6 +148,10 @@ export default function MainDrawer() {
     const handleDrawer = () => {
         setOpen(!open);
     };
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const name = useSelector((state) => state.states.name)
+    const id = useSelector((state) => state.states.id)
 
     return (
         <div className={classes.root}>
@@ -192,7 +197,7 @@ export default function MainDrawer() {
                                     }
                                 />
                             </ListItem>
-                            <ListItem button key={2} className={classes.listItemSpacing}>
+                            <ListItem button key={2} className={classes.listItemSpacing} onClick={() => history.push('/')}>
                                 <ListItemIcon>
                                     <img src={dashboard} alt='User Dashboard' className={classes.imageIcon} />
                                 </ListItemIcon>
@@ -203,7 +208,7 @@ export default function MainDrawer() {
                                         })}
                                     >DASHBOARD</Typography>} />
                             </ListItem>
-                            <ListItem button key={3} className={classes.listItemSpacing}>
+                            <ListItem button key={3} className={classes.listItemSpacing} onClick={() => history.push('/reports')}>
                                 <ListItemIcon>
                                     <img src={report} alt='Reports' className={classes.imageIcon} />
                                 </ListItemIcon>
@@ -215,7 +220,7 @@ export default function MainDrawer() {
                                     >REPORTS</Typography>}
                                 />
                             </ListItem>
-                            <ListItem button key={4} className={classes.listItemSpacing}>
+                            <ListItem button key={4} className={classes.listItemSpacing} onClick={() => history.push('/settings')}>
                                 <ListItemIcon>
                                     <img src={setting} alt='Settings' className={classes.imageIcon} />
                                 </ListItemIcon>
@@ -236,12 +241,12 @@ export default function MainDrawer() {
                                         className={clsx(classes.listItemTextStyle, {
                                             [classes.hide]: !open,
                                         })}
-                                    >ABDUL HADI<br /><Typography variant="caption">PID: 12345678</Typography></Typography>} />
+                                    >{name}<br /><Typography variant="caption">PID: {id}</Typography></Typography>} />
                             </ListItem>
                             <Divider className={classes.dividerStyle} />
-                            <ListItem button key={6} className={classes.listItemSpacing}>
+                            <ListItem button key={6} className={classes.listItemSpacing} onClick={() => dispatch(logout())}>
                                 <ListItemIcon>
-                                    <img src={logout} alt='Logout' className={classes.imageIcon} />
+                                    <img src={logouticn} alt='Logout' className={classes.imageIcon} />
                                 </ListItemIcon>
                                 <ListItemText
                                     primary={<Typography variant="body1"

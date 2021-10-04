@@ -50,7 +50,10 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
         color: "#fff",
         fontWeight: "bold",
-        width: "90%"
+        width: "90%",
+        "&:hover": {
+            background: "rgba(53,133,218,0.7)",
+        }
     }
 }))
 

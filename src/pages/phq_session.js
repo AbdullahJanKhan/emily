@@ -8,9 +8,13 @@ import ReactPlayer from 'react-player'
 // import Drawer from "../components/drawer";
 import Em_db from "../animations/dashboard.mp4";
 import Em_es from "../animations/emily_session.mp4";
+import Em_sp from "../animations/emily_sp.mp4";
 import Em_lg from "../animations/sample.mp4";
 
 const data = [
+    {
+        src: Em_sp,
+    },
     {
         src: Em_db,
     },
@@ -87,12 +91,13 @@ export default function Profile() {
                     vidref.current.load();
                 }
 
-            }, 5000);
+            }, 2000);
         }
     })
-    // < video autoPlay muted className = { classes.videoDim } ref = { vidref } >
+
+    // <video autoPlay className={classes.videoDim} ref={vidref}>
     //     <source src={data[count]['src']} type="video/mp4" />
-    //         </video >
+    // </video>
 
     return (
 
@@ -100,7 +105,7 @@ export default function Profile() {
             justifyContent="flex-end"
             alignItems="flex-end" className={classes.root}>
             <Grid item xs={12}>
-                <ReactPlayer url={data[count]['src']} playing playsinline />
+                <ReactPlayer url={data[count]['src']} playing muted />
             </Grid>
             <Grid item xs={3} className={classes.BtnPlacement}>
                 <Button fullWidth
