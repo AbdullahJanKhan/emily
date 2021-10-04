@@ -13,7 +13,13 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { login, setuser, settoken } from "../pages/stateSlice";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from '@material-ui/lab/Alert';
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const validationSchema = yup.object({
     username: yup
@@ -136,6 +142,19 @@ const useStyles = makeStyles({
 export default function Login() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
+    const [snackbar, setsnackbar] = React.useState({
+        open: false,
+        msg: "",
+        type: ""
+    })
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setsnackbar({ ...snackbar, open: false });
+    };
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -146,10 +165,33 @@ export default function Login() {
             axios.post("http://localhost:5000/users/login", values)
                 .then(res => {
                     if (res.data.success) {
-                        dispatch(setuser(res.data.user))
-                        dispatch(settoken(res.data.token))
-                        dispatch(login())
+                        setsnackbar({
+                            ...snackbar,
+                            open: true,
+                            msg: "Login Successfull",
+                            type: "success"
+                        })
+                        setTimeout(() => {
+                            dispatch(login());
+                            dispatch(setuser(res.data.user));
+                            dispatch(settoken(res.data.token));
+                        }, 1000)
+                    } else {
+                        setsnackbar({
+                            ...snackbar,
+                            open: true,
+                            msg: "Invalid Credentials",
+                            type: "error"
+                        })
                     }
+                })
+                .catch(err => {
+                    setsnackbar({
+                        ...snackbar,
+                        open: true,
+                        msg: "Invalid Credentials",
+                        type: "error"
+                    })
                 })
         },
     });
@@ -163,7 +205,11 @@ export default function Login() {
                     </Grid>
                     <Grid item md={5}></Grid>
                     <Grid item xs={3} md={2}>
-                        <Typography variant="body1" className={classes.homeText}>HOME</Typography>
+                        <Typography
+                            variant="body1"
+                            className={classes.homeText}
+                            onClick={() => history.push("/")}
+                        >HOME</Typography>
                     </Grid>
                     <Grid item xs={6} md={2}>
                         <Button
@@ -267,8 +313,16 @@ export default function Login() {
                 <video autoPlay loop muted className={classes.videoDim}>
                     <source src={Emily} type="video/mp4" />
                 </video>
-
             </Grid>
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert severity={snackbar.type}>
+                    {snackbar.msg}
+                </Alert>
+            </Snackbar>
         </Grid>
     )
 }

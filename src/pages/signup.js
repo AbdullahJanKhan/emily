@@ -14,6 +14,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 import logo from '../emily/Emily Logo-01.png';
 import tick from '../emily/tick.svg';
+import { useHistory } from "react-router-dom";
 
 import Step1 from '../components/signup_step1';
 import Step2 from '../components/signup_step2';
@@ -71,6 +72,9 @@ const useStyles = makeStyles({
         color: "#3585da",
         fontWeight: 'bold',
         padding: "5px 10px 0px 10px",
+        "&:hover": {
+            cursor: "pointer"
+        }
     },
     loginBoxGrid: {
         justifyContent: 'center',
@@ -215,58 +219,65 @@ export default function Signup() {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
-
+    const history = useHistory();
     return (
 
-            <Grid container className={classes.root}>
-                <Grid item xs={12} md={6} className={classes.leftGrid}>
+        <Grid container className={classes.root}>
+            <Grid item xs={12} md={6} className={classes.leftGrid}>
 
                 <Grid container direction="row" justifyContent="space-between" alignItems="center" >
-                        <Grid item xs={3}>
+                    <Grid item xs={3}>
                         <img src={logo} alt="Emily Logo" style={{ width: '80px', paddingTop: '10px', paddingLeft: '20px' }} />
-                        </Grid>
-                        <Grid item md={5}></Grid>
-                        <Grid item xs={3} md={2}>
-                            <Typography variant="body1" className={classes.homeText}>HOME</Typography>
-                        </Grid>
-                        <Grid item xs={6} md={2}>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                className={classes.leftGridHeaderBtn}
-                                classes={{
-                                    contained: classes.contained
-                                }}
-                            >SIGN IN</Button>
-                        </Grid>
                     </Grid>
-                    <Grid container className={classes.loginBoxGrid}>
-                        <Grid item xs={11} sm={8} className={classes.steproot}>
-                            <Card className={classes.loginCard}>
-                                <Grid item xs={12}>
-                                    <Stepper
-                                        activeStep={activeStep}
-                                        alternativeLabel
-                                        connector={<ColorlibConnector />}
-                                        className={classes.stepper}
-                                    >
-                                        {steps.map((label) => (
-                                            <Step key={label}>
-                                                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-                                            </Step>
-                                        ))}
-                                    </Stepper>
-                                </Grid>
-                                <Grid container>
-                                    <Grid item sm={1}></Grid>
-                                    <Grid item xs={12} sm={10}>
-                                        {getStepContent(activeStep, setActiveStep)}
-                                    </Grid>
-                                </Grid>
-                            </Card>
-                        </Grid>
+                    <Grid item md={5}></Grid>
+                    <Grid item xs={3} md={2}>
+                        <Typography
+                            variant="body1"
+                            className={classes.homeText}
+                            onClick={() => history.push('/')}
+                        >
+                            HOME
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={6} md={2}>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            className={classes.leftGridHeaderBtn}
+                            classes={{
+                                contained: classes.contained
+                            }}
+                            onClick={() => history.push("/login")}
+                        >SIGN IN</Button>
                     </Grid>
                 </Grid>
+                <Grid container className={classes.loginBoxGrid}>
+                    <Grid item xs={11} sm={8} className={classes.steproot}>
+                        <Card className={classes.loginCard}>
+                            <Grid item xs={12}>
+                                <Stepper
+                                    activeStep={activeStep}
+                                    alternativeLabel
+                                    connector={<ColorlibConnector />}
+                                    className={classes.stepper}
+                                >
+                                    {steps.map((label) => (
+                                        <Step key={label}>
+                                            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                                        </Step>
+                                    ))}
+                                </Stepper>
+                            </Grid>
+                            <Grid container>
+                                <Grid item sm={1}></Grid>
+                                <Grid item xs={12} sm={10}>
+                                    {getStepContent(activeStep, setActiveStep)}
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
+                </Grid>
+            </Grid>
 
 
 

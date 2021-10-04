@@ -13,6 +13,14 @@ import axios from "axios";
 
 import { setuser } from "../pages/stateSlice";
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router';
+
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles({
     inputProps: {
@@ -57,6 +65,19 @@ export default function Step1({ setActiveStep }) {
     const classes = useStyles();
 
     const dispatch = useDispatch();
+    const history = useHistory();
+    const [snackbar, setsnackbar] = React.useState({
+        open: false,
+        msg: "",
+        type: ""
+    })
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setsnackbar({ ...snackbar, open: false });
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -72,9 +93,32 @@ export default function Step1({ setActiveStep }) {
             axios.post("http://localhost:5000/users/signup", values)
                 .then(res => {
                     if (res.data.success) {
-                        dispatch(setuser(res.data.user))
-                        setActiveStep(1);
+                        setsnackbar({
+                            ...snackbar,
+                            open: true,
+                            msg: "Registeration Successful",
+                            type: "success"
+                        })
+                        setTimeout(() => {
+                            dispatch(setuser(res.data.user));
+                            setActiveStep(1);
+                        }, 1000)
+                    } else {
+                        setsnackbar({
+                            ...snackbar,
+                            open: true,
+                            msg: "Registeration Unsuccessful",
+                            type: "error"
+                        })
                     }
+                })
+                .catch(err => {
+                    setsnackbar({
+                        ...snackbar,
+                        open: true,
+                        msg: "Registeration Unsuccessful",
+                        type: "error"
+                    })
                 })
         },
     })
@@ -180,11 +224,27 @@ export default function Step1({ setActiveStep }) {
                 </Button>
             </form>
             <Grid className={classes.btmText}>
-                <Typography variant="body2" display="inline">
-                    HAVE AN ACCOUNT?
-                </Typography>
-                <Typography variant="body2" className={classes.typographyText} display="inline" href="/login"> SIGNIN</Typography>
+                <div onClick={() => history.push('/login')} style={{ cursor: "pointer" }}>
+                    <Typography
+                        variant="body2"
+                        display="inline"
+                    >
+                        HAVE AN ACCOUNT?
+                    </Typography>
+                    <Typography
+                        variant="body2"
+                        className={classes.typographyText}
+                        display="inline" > SIGNIN</Typography>
+                </div>
             </Grid>
+            <Snackbar open={snackbar.open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity={snackbar.type}>
+                    {snackbar.msg}
+                </Alert>
+            </Snackbar>
         </Grid>
     )
 }
