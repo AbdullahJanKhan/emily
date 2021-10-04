@@ -107,7 +107,7 @@ export default function Step3({ setActiveStep }) {
                         })
                         setTimeout(() => {
                             dispatch(setuser(res.data.user));
-                            setActiveStep(3);
+                            dispatch(login());
                         }, 1000)
                     } else {
                         setsnackbar({
