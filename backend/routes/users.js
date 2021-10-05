@@ -32,8 +32,8 @@ router.post('/signup', (req, res) => {
       } else {
         if (req.body.email)
           user.email = req.body.email
-        if (req.body.contact)
-          user.contact = req.body.contact
+        if (req.body.phone_number)
+          user.contact = req.body.phone_number
         user.save((err, user) => {
           if (err) {
             res.statusCode = 200;
@@ -100,6 +100,7 @@ router.post('/complete_profile', (req, res) => {
       user.country = req.body.country
       user.dob = req.body.dob
       user.occupation = req.body.occupation
+      user.gender = req.body.gender
       user.save((err, user) => {
         if (err) {
           res.json({

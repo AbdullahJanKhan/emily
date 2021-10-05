@@ -10,6 +10,8 @@ import Em_es from "../animations/emily_session.mp4";
 import Em_sp from "../animations/emily_sp.mp4";
 import Em_lg from "../animations/sample.mp4";
 
+import { useHistory } from "react-router-dom";
+
 const data = [
     {
         src: Em_sp,
@@ -50,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
 
     },
     BtnPlacement: {
-        marginBottom: "2%",
-        marginRight: '2%',
+        marginBottom: 5,
+        marginRight: 5,
 
     },
     Btn: {
@@ -84,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Profile() {
     const classes = useStyles();
     const [count, setcount] = React.useState(0);
+    const history = useHistory();
     const vidref = React.useRef();
     var score;
 
@@ -113,47 +116,51 @@ export default function Profile() {
                 </video>
                 <Webcam height={200} height={200} mirrored />
             </Grid>
-            <Grid item className={classes.Wbcam} >
-
-            </Grid>
-            <Grid container direction="column"
+            <Grid item className={classes.Wbcam} />
+            <Grid container
+                direction="column"
                 justifyContent="flex-end"
-                alignItems="flex-end">
-            <Grid item xs={3} className={classes.BtnPlacement}>
-                <Button fullWidth
-                    variant="contained"
-                    className={classes.Btn}
-                    classes={{
-                        contained: classes.Contained,
-                        label: classes.BtnText,
-                    }}
+                alignItems="flex-end"
+            >
+                <Grid item xs={6}
+                    direction="column"
+                    justifyContent="flex-end"
+                    alignItems="flex-end"
                 >
-                    END SESSION
-                </Button>
-                <Grid>
-                    <Grid item xs={3} className={classes.BtnPlacement}>
+                    <Grid item xs={12} className={classes.BtnPlacement}>
                         <Button fullWidth
                             variant="contained"
                             className={classes.Btn}
                             classes={{
-                                contained: classes.Contained,
                                 label: classes.BtnText,
                             }}
+                            onClick={history.push("/")}
                         >
-                            PAUSE SESSION
+                            END SESSION
                         </Button>
-                    </Grid>
-                    <Grid item xs={3} className={classes.BtnPlacement}>
-                        <Button fullWidth
-                            variant="contained"
-                            className={classes.Btn}
-                            classes={{
-                                contained: classes.Contained,
-                                label: classes.BtnText,
-                            }}
-                        >
-                            REPEAT QUESTION
-                        </Button>
+                        <Grid>
+                            <Grid item xs={12} className={classes.BtnPlacement}>
+                                <Button fullWidth
+                                    variant="contained"
+                                    className={classes.Btn}
+                                    classes={{
+                                        label: classes.BtnText,
+                                    }}
+                                >
+                                    PAUSE SESSION
+                                </Button>
+                            </Grid>
+                            <Grid item xs={12} className={classes.BtnPlacement}>
+                                <Button fullWidth
+                                    variant="contained"
+                                    className={classes.Btn}
+                                    classes={{
+                                        label: classes.BtnText,
+                                    }}
+                                >
+                                    REPEAT QUESTION
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>

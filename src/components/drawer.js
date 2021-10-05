@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        overflowX: "hidden",
+        overflow: "hidden",
         width: theme.spacing(8) + 1,
         [theme.breakpoints.up("sm")]: {
             width: theme.spacing(12) + 1,
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
-        overflowX: "hidden",
+        overflow: "hidden",
     },
     toolbar: {
         backgroundColor: '#3585da',
@@ -232,7 +232,8 @@ export default function MainDrawer() {
                                     >SETTINGS</Typography>} />
                             </ListItem>
                             <Divider className={open ? classes.dividerStyle : classes.dividerStyleClose} />
-                            <ListItem button key={5} className={classes.listItemSpacing}>
+                            <ListItem button key={5} className={classes.listItemSpacing}
+                                onClick={() => history.push("/profile")}>
                                 <ListItemIcon>
                                     <img src={user} alt='User' className={classes.imageIcon} />
                                 </ListItemIcon>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Grid, makeStyles, Typography, TextField } from '@material-ui/core';
-
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Userprofile() {
     const classes = useStyles();
+    const user = useSelector((state) => state.states.user)
+    console.log(user)
     return (
         <Grid container className={classes.root}>
             <Typography variant="h5" className={classes.heading}>User Profile</Typography>
@@ -44,7 +46,7 @@ export default function Userprofile() {
                         fullWidth
                         id="outlined-read-only-input"
                         label="PATIENT ID"
-                        defaultValue="31221321"
+                        defaultValue={user._id}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -63,7 +65,7 @@ export default function Userprofile() {
                         fullWidth
                         id="outlined-read-only-input"
                         label="USERNAME"
-                        defaultValue="HADIABID98"
+                        defaultValue={user.username}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -82,7 +84,7 @@ export default function Userprofile() {
                         fullWidth
                         id="outlined-read-only-input"
                         label="FULL NAME"
-                        defaultValue="ABDUL HADI ABID"
+                        defaultValue={user.name.toUpperCase()}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -103,7 +105,7 @@ export default function Userprofile() {
                         fullWidth
                         id="outlined-read-only-input"
                         label="EMAIL ADDRESS"
-                        defaultValue="HADI98ABDUL@GMAIL.COM"
+                        defaultValue={user.email}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -121,8 +123,8 @@ export default function Userprofile() {
                     <TextField
                         fullWidth
                         id="outlined-read-only-input"
-                        label="PCONTACT NUMBER"
-                        defaultValue="+923143037736"
+                        label="CONTACT NUMBER"
+                        defaultValue={user.contact}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -141,7 +143,7 @@ export default function Userprofile() {
                         fullWidth
                         id="outlined-read-only-input"
                         label="OCCUPATION"
-                        defaultValue="STUDENT"
+                        defaultValue={user.occupation}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -162,7 +164,7 @@ export default function Userprofile() {
                         fullWidth
                         id="outlined-read-only-input"
                         label="COUNTRY"
-                        defaultValue="PAKISTAN"
+                        defaultValue={user.country.toUpperCase()}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -181,7 +183,7 @@ export default function Userprofile() {
                         fullWidth
                         id="outlined-read-only-input"
                         label="GENDER"
-                        defaultValue="MALE"
+                        defaultValue={user.gender}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -200,7 +202,7 @@ export default function Userprofile() {
                         fullWidth
                         id="outlined-read-only-input"
                         label="DATE OF BIRTH"
-                        defaultValue="23/05/1999"
+                        defaultValue={user.dob}
                         InputProps={{
                             readOnly: true,
                         }}

@@ -9,11 +9,6 @@ import Drawer from "../components/drawer";
 import Em_db from "../animations/dashboard.mp4";
 import { useHistory } from 'react-router';
 
-
-
-
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -86,7 +81,8 @@ export default function Profile() {
                     classes={{
                         contained: classes.Contained,
                         label: classes.BtnText,
-                    }} href="/"
+                    }}
+                    onClick={() => history.push('/session')}
                 >
                     START SESSION
                 </Button>
