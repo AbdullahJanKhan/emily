@@ -9,7 +9,7 @@ import "./App.css";
 //import Settings from './pages/settings';
 // import Report from './pages/reports';
 // import Profile from './pages/profile';
-import Startsession from './components/start_session';
+import Phq from './pages/phq_session';
 
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
@@ -17,8 +17,7 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 // import Homepage from "./pages/Homepage";
 // import Settings from './pages/Settings'
 import Main from './routes/main'
-// import Phq from './pages/phq_session'
-
+// import Dashboard from './pages/dashboard'
 const theme = createTheme({
   typography: {
     fontFamily: "Montserrat",

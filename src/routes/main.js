@@ -6,7 +6,8 @@ import Reports from "../pages/reports";
 import Profile from "../pages/profile";
 import Settings from "../pages/Settings";
 import Homepage from "../pages/Homepage";
-import Dashboard from "../pages/dashboard"
+import Dashboard from "../pages/dashboard";
+import Phq from '../pages/phq_session'
 
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
@@ -32,6 +33,9 @@ export default function Routes() {
                         </Route>
                         <Route path="/profile">
                             <Profile />
+                        </Route>
+                        <Route path="/session">
+                            <Phq />
                         </Route>
                         <Route path="*">
                             <Redirect to='/' />

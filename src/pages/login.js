@@ -6,6 +6,10 @@ import logo from '../emily/Emily Logo-01.png';
 import google from "../emily/google.svg";
 import facebook from "../emily/facebook.svg";
 import Emily from "../animations/emily_login.mp4";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Visibility from "@material-ui/icons/Visibility";
 
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -144,6 +148,9 @@ const useStyles = makeStyles({
 
 export default function Login() {
     const classes = useStyles();
+    const [showPassword, setShowPassword] = React.useState(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
     const dispatch = useDispatch();
     const history = useHistory();
     const [snackbar, setsnackbar] = React.useState({
@@ -251,7 +258,6 @@ export default function Login() {
                                 <TextField
                                     label="PASSWORD"
                                     name="password"
-                                    type='password'
                                     fullWidth
                                     InputLabelProps={{
                                         className: classes.inputProps
@@ -259,7 +265,20 @@ export default function Login() {
                                     inputProps={{
                                         className: classes.inputProps,
                                     }}
-                                    value={formik.values.password}
+                                    type={showPassword ? "text" : "password"}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                >
+                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }} value={formik.values.password}
                                     onChange={formik.handleChange}
                                     error={formik.touched.password && Boolean(formik.errors.password)}
                                     helperText={formik.touched.password && formik.errors.password}

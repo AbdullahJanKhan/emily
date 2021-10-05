@@ -5,7 +5,10 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Visibility from "@material-ui/icons/Visibility";
 import { useFormik } from 'formik';
 import { basicVal } from '../pages/yup';
 
@@ -62,8 +65,14 @@ const useStyles = makeStyles({
 })
 
 export default function Step1({ setActiveStep }) {
-    const classes = useStyles();
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
+    const classes = useStyles();
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    const handleClickShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
+    const handleMouseDownConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
     const dispatch = useDispatch();
     const history = useHistory();
     const [snackbar, setsnackbar] = React.useState({
@@ -178,7 +187,6 @@ export default function Step1({ setActiveStep }) {
                 <TextField
                     fullWidth
                     label="PASSWORD"
-                    type="password"
                     name="password"
                     className={classes.inputField}
                     InputLabelProps={{
@@ -186,6 +194,20 @@ export default function Step1({ setActiveStep }) {
                     }}
                     inputProps={{
                         className: classes.inputProps,
+                    }}
+                    type={showPassword ? "text" : "password"}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
                     }}
                     value={formik.values.password}
                     onChange={formik.handleChange}
@@ -195,7 +217,6 @@ export default function Step1({ setActiveStep }) {
                 <TextField
                     fullWidth
                     label="CONFIRM PASSWORD"
-                    type="password"
                     name="confirmpassword"
                     className={classes.inputField}
                     InputLabelProps={{
@@ -203,6 +224,24 @@ export default function Step1({ setActiveStep }) {
                     }}
                     inputProps={{
                         className: classes.inputProps,
+                    }}
+                    type={showConfirmPassword ? "text" : "password"}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowConfirmPassword}
+                                    onMouseDown={handleMouseDownConfirmPassword}
+                                >
+                                    {showConfirmPassword ? (
+                                        <Visibility />
+                                    ) : (
+                                        <VisibilityOff />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
                     }}
                     value={formik.values.confirmpassword}
                     onChange={formik.handleChange}
