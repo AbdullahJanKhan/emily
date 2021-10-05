@@ -86,7 +86,7 @@ export default function Profile() {
                     classes={{
                         contained: classes.Contained,
                         label: classes.BtnText,
-                    }} href="/session"
+                    }} href="/"
                 >
                     START SESSION
                 </Button>
