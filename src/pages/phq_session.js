@@ -3,8 +3,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
-import ReactPlayer from 'react-player'
-
+import Webcam from "react-webcam";
 // import Drawer from "../components/drawer";
 import Em_db from "../animations/dashboard.mp4";
 import Em_es from "../animations/emily_session.mp4";
@@ -32,7 +31,7 @@ const data = [
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        background: "#f5f5f5",
+
         minHeight: "100vh",
         overflow: "hidden"
     },
@@ -46,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
         bottom: '0',
         minWidth: '100vw',
         height: '100vh',
-        objectFit: "cover"
+        objectFit: "cover",
+        zIndex: '-1',
 
     },
     BtnPlacement: {
@@ -74,6 +74,10 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff",
         fontSize: 16,
     },
+    Wbcam: {
+        width: "200px",
+        height: "200px"
+    }
 }))
 
 
@@ -81,6 +85,7 @@ export default function Profile() {
     const classes = useStyles();
     const [count, setcount] = React.useState(0);
     const vidref = React.useRef();
+    var score;
 
     React.useEffect(() => {
         if (count < data.length - 1) {
@@ -101,12 +106,19 @@ export default function Profile() {
 
     return (
 
-        <Grid container direction="column"
-            justifyContent="flex-end"
-            alignItems="flex-end" className={classes.root}>
+        <Grid container className={classes.root}>
             <Grid item xs={12}>
-                <ReactPlayer url={data[count]['src']} playing muted />
+                <video autoPlay muted className={classes.videoDim}>
+                    <source src={Em_es} type="video/mp4" />
+                </video>
+                <Webcam height={200} height={200} mirrored />
             </Grid>
+            <Grid item className={classes.Wbcam} >
+
+            </Grid>
+            <Grid container direction="column"
+                justifyContent="flex-end"
+                alignItems="flex-end">
             <Grid item xs={3} className={classes.BtnPlacement}>
                 <Button fullWidth
                     variant="contained"
@@ -116,8 +128,35 @@ export default function Profile() {
                         label: classes.BtnText,
                     }}
                 >
-                    START SESSION
+                    END SESSION
                 </Button>
+                <Grid>
+                    <Grid item xs={3} className={classes.BtnPlacement}>
+                        <Button fullWidth
+                            variant="contained"
+                            className={classes.Btn}
+                            classes={{
+                                contained: classes.Contained,
+                                label: classes.BtnText,
+                            }}
+                        >
+                            PAUSE SESSION
+                        </Button>
+                    </Grid>
+                    <Grid item xs={3} className={classes.BtnPlacement}>
+                        <Button fullWidth
+                            variant="contained"
+                            className={classes.Btn}
+                            classes={{
+                                contained: classes.Contained,
+                                label: classes.BtnText,
+                            }}
+                        >
+                            REPEAT QUESTION
+                        </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     )

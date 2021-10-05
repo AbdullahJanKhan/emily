@@ -7,6 +7,10 @@ import Button from '@material-ui/core/Button';
 
 import Drawer from "../components/drawer";
 import Em_db from "../animations/dashboard.mp4";
+import { useHistory } from 'react-router';
+
+
+
 
 
 
@@ -60,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile() {
     const classes = useStyles();
+    const history = useHistory();
     return (
 
         <Grid container direction="column"
@@ -81,7 +86,7 @@ export default function Profile() {
                     classes={{
                         contained: classes.Contained,
                         label: classes.BtnText,
-                    }}
+                    }} href="/"
                 >
                     START SESSION
                 </Button>
