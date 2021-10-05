@@ -16,8 +16,8 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 // import Login from "./pages/login";
 // import Homepage from "./pages/Homepage";
 // import Settings from './pages/Settings'
-import Main from './routes/main'
-// import Phq from './pages/phq_session'
+// import Main from './routes/main'
+import Phq from './pages/phq_session'
 
 const theme = createTheme({
   typography: {
@@ -32,7 +32,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Main />
+        <Phq />
       </div>
     </ThemeProvider>
   );

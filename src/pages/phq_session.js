@@ -81,6 +81,7 @@ export default function Profile() {
     const classes = useStyles();
     const [count, setcount] = React.useState(0);
     const vidref = React.useRef();
+    var score;
 
     React.useEffect(() => {
         if (count < data.length - 1) {
@@ -103,9 +104,11 @@ export default function Profile() {
 
         <Grid container direction="column"
             justifyContent="flex-end"
-            alignItems="flex-end" className={classes.root}>
+            alignItems="center" className={classes.root}>
             <Grid item xs={12}>
-                <ReactPlayer url={data[count]['src']} playing muted />
+                <video autoPlay loop muted className={classes.videoDim}>
+                    <source src={Em_es} type="video/mp4" />
+                </video>
             </Grid>
             <Grid item xs={3} className={classes.BtnPlacement}>
                 <Button fullWidth
@@ -116,8 +119,34 @@ export default function Profile() {
                         label: classes.BtnText,
                     }}
                 >
-                    START SESSION
+                    END SESSION
                 </Button>
+                <Grid>
+                    <Grid item xs={3} className={classes.BtnPlacement}>
+                        <Button fullWidth
+                            variant="contained"
+                            className={classes.Btn}
+                            classes={{
+                                contained: classes.Contained,
+                                label: classes.BtnText,
+                            }}
+                        >
+                            PAUSE SESSION
+                        </Button>
+                    </Grid>
+                    <Grid item xs={3} className={classes.BtnPlacement}>
+                        <Button fullWidth
+                            variant="contained"
+                            className={classes.Btn}
+                            classes={{
+                                contained: classes.Contained,
+                                label: classes.BtnText,
+                            }}
+                        >
+                            REPEAT QUESTION
+                        </Button>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     )
