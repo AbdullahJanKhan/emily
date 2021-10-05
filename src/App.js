@@ -31,7 +31,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Phq />
+        <Main />
       </div>
     </ThemeProvider>
   );

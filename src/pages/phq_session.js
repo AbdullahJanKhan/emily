@@ -9,7 +9,6 @@ import Em_db from "../animations/dashboard.mp4";
 import Em_es from "../animations/emily_session.mp4";
 import Em_sp from "../animations/emily_sp.mp4";
 import Em_lg from "../animations/sample.mp4";
-import zIndex from "@material-ui/core/styles/zIndex";
 
 const data = [
     {
